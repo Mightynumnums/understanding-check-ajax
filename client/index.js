@@ -14,6 +14,47 @@ Your Tasks:
 */
 
 // ALL YOUR CODE HERE
+ //dogs
+const hash = location.hash.slice(1); //in the window, the url has a hash, to get the valie, we will use slice to get that value
+  if (hash === 'dogs') {  //if the hash value equals to a 'animal' we are looking for...
+    fetch('/dogs') //fetch all the 'animals'
+    //The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
+      .then(res => res.json()) //invoke!
+      .then(renderView) //render the view with the results
+      .catch(console.error); //take care of the errors
+    }
+  
+  //cats
+  const hash = location.hash.slice(1);
+  if (hash === 'cats') {
+    fetch('/cats') 
+      .then(res => res.json()) //invoke!
+      .then(renderView) //render the view with the results
+      .catch(console.error); //take care of the errors
+    }
+
+  //dragons
+
+  const hash = location.hash.slice(1);
+  if (hash === 'dragons') {
+    fetch('/dragons') 
+      .then(res => res.json()) //invoke!
+      .then(renderView) //render the view with the results
+      .catch(console.error); //take care of the errors
+    }
+
+    //function to connect the buttons to the data being rendered
+
+    ['dragon', 'cat','dog'].forEach(animal => { //we have an array with all the animal kinds, we will go through each animal(forEach) and for each animal we will:
+      const button = document.getElementById('${animal}-button'); //get an animal assiciated with a button assigned to it's kind
+        button.addEventListener('click', () => { //if the button is pressed....fetch animals
+          fetch('/${animal}s') //fetch the animal data associated with that animal's kind from the database
+          .then(res => res.json()) //then, once the above steps are completed, respond with the json rendered data 
+          .then(renderView) //then render the data in the window
+          .then(() => location.hash = animal) //then place the animal's name inside the url after the hash?
+          .catch(console.error); //catch the arrors if there are any
+        })
+    })
 
 
 //This function takes an array of animal objects, and renders them on the page.
